@@ -8,7 +8,6 @@ from tensorflow import keras
 from torchvision import transforms
 import torch
 from PIL import Image
-# Global Variables 
 
 session = tf.Session()
 
@@ -48,8 +47,6 @@ with tf.device('cpu:0'):
     print(crackList[0])
     print(getCrackPred(vggUNet,crackList[0]))
     print(getCrackPred(resUNet,crackList[1]))
-#getThermalPred(IntertUNet,rgbFiles[0])
-
 
 from flask import Flask, jsonify, request
 
@@ -125,9 +122,6 @@ def predict():
             ret = {'original_RGB':np.array(r).tolist(),'original_THR':np.array(t).tolist(),'pred':np.array(pred_PIL).tolist()}
             return jsonify(ret)
         
-        
-        
-        
         elif op == 'crack_pred':
             pixel_list = request.files['crack_image']
             print('[DEBUG] pixel_list type:',type(pixel_list))
@@ -183,9 +177,6 @@ def predict():
             return jsonify({'check op code':0})
 
         
-        
-#files={"file": open('<PATH/TO/.jpg/FILE>/cat.jpg','rb')}
-#files={"op": 'examples'}
 '''
 op -> 'examples count', 'crack', 'thermal'
 
@@ -194,9 +185,6 @@ op -> 'examples count', 'crack', 'thermal'
 {'op':'thermal','num':123} --> {'original_RGB':r,'original_THR':t,'pred':pred_PIL}
 '''
 
-#import requests
-#resp = requests.post("http://localhost:5000/predict",files={"file": open('<PATH/TO/.jpg/FILE>/cat.jpg','rb')})
-    
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
 
